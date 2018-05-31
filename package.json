@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/jamesmeyers88/record-store-real#readme",
   "dependencies": {
+    "angular": "^1.7.0",
     "body-parser": "^1.18.3",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "mongoose": "^5.1.3"
   }
 }

@@ -6,42 +6,49 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="vendors/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
-    <script src="vendors/jquery-3.3.1.min.js"></script>
+    <script src="vendors/angular.min.js"></script>
     <script src="scripts/client.js"></script>
     <title>Record Store</title>
 </head>
 <body>
-    <section class="jumbotron">
-    <h1>Welcome to James's Record Store</h1>
-    </section>
-    <br>
-    <section>
-        <h2>Add Record</h2>
-        <form>
-        <input type="text" placeholder="Artist" id="artistIn" class="inputs"/>
-        <input type="text" placeholder="Album" id="albumIn" class="inputs"/>
-        <input type="number" placeholder="Year" id="yearIn" class="inputs"/>
-        <input type="text" placeholder="Genre" id="genreIn" class="inputs"/>
-        <input type="submit" id="submitButton" value="Add Record">
-        </form>
-    </section>
-    <br>
-    <section>
-        <h2>All Records</h2>
-        <table class="table table-striped table-responsive">
-            <thead>
-                <tr>
-                    <th>Artist</th>
-                    <th>Album</th>
-                    <th>Year</th>
-                    <th>Genre</th>
-                </tr>
-            </thead>
-            <tbody id="recordSpot">
-                <!-- Records added by JS -->
-
-            </tbody>
-        </table>
-    </section>
+    <div ng-app="myApp">
+        <div ng-controller="RecordStoreController as RSC">
+            <section class="jumbotron">
+                <h1>Welcome to James's Record Store</h1>
+            </section>
+            <br>
+            <section>
+                <h2>Add Record</h2>
+                    <input type="text" placeholder="Artist" ng-model="RSC.artistIn" id="artistIn" class="inputs" />
+                    <input type="text" placeholder="Album" ng-model="RSC.albumNameIn" id="albumIn" class="inputs" />
+                    <input type="number" placeholder="Year" ng-model="RSC.yearIn" id="yearIn" class="inputs" />
+                    <input type="text" placeholder="Genre" ng-model="RSC.genreListIn" id="genreIn" class="inputs" />
+                    <button id="submitButton" ng-click="RSC.getRecord()" placeholder="Add Record">Submit</button>
+            </section>
+            <br>
+            <section>
+                <h2>All Records</h2>
+                <table class="table table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Artist</th>
+                            <th>Album</th>
+                            <th>Year</th>
+                            <th>Genre</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recordSpot">
+                        <tr ng-repeat="record in RSC.records" ng-click="RSC.removeMe( $index )">
+                            <td  >Artist: {{record.artist}}</td>
+                            <td>Album: {{record.albumName}}</td>
+                            <td>Year: {{record.year}}</td>
+                            <td>Genre: {{record.genreList}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+    
 </body>
 </html>
